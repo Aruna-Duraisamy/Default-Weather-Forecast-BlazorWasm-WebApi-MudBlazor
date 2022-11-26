@@ -2,7 +2,7 @@
 
 - [WeatherApp.Api](#weatherapp.api)
   - [Weather API response](#weather-api-response)
-- [WeatherApp.Web](#weatherapp.web)
+- [WeatherApp.Web](#WeatherApp.Web)
 
 ## WeatherApp.Api
 ```js
