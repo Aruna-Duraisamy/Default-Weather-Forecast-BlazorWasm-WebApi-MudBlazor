@@ -1,0 +1,82 @@
+@page "/fetchdata1"
+@using System.Net.Http.Json
+@inject HttpClient httpClient
+
+<MudTable Items="@WeatherForecasts" Dense="@dense" Hover="@hover"
+    Bordered="@bordered" Striped="@striped"
+    Filter="new Func<WeatherForecast,bool>(FilterFunc1)"
+    @bind-SelectedItem="selectedItem1">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Weather Forecasts</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString1" Placeholder="Search"
+            Adornment="Adornment.Start"
+            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"
+            Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Date</MudTh>
+        <MudTh>Temp. (C)</MudTh>
+        <MudTh>Temp. (F)</MudTh>
+        <MudTh>Summary</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Date">@context.Date.ToShortDateString()</MudTd>
+        <MudTd DataLabel="TemperatureC">@context.TemperatureC</MudTd>
+        <MudTd DataLabel="TemperatureF">@context.TemperatureF</MudTd>
+        <MudTd DataLabel="Summary">@context.Summary</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+    private WeatherForecast selectedItem1 = null!;
+    private HashSet<WeatherForecast> selectedItems = new HashSet<WeatherForecast>();
+
+    private IEnumerable<WeatherForecast> WeatherForecasts = new
+    List<WeatherForecast>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        WeatherForecasts = await
+        httpClient.GetFromJsonAsync<List<WeatherForecast>>("/WeatherForecast");
+    }
+
+    private bool FilterFunc1(WeatherForecast WeatherForecast) =>
+    FilterFunc(WeatherForecast, searchString1);
+
+    private bool FilterFunc(WeatherForecast WeatherForecast, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (WeatherForecast.Summary.Contains(searchString,
+        StringComparison.OrdinalIgnoreCase))
+            return true;
+        /*if (WeatherForecast.Name.Contains(searchString,
+        StringComparison.OrdinalIgnoreCase))
+        return true;
+        if ($"{WeatherForecast.Number} {WeatherForecast.Position}
+        {WeatherForecast.Molar}".Contains(searchString))
+        return true;*/
+        return false;
+    }
+    public class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        public string? Summary { get; set; }
+
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}
