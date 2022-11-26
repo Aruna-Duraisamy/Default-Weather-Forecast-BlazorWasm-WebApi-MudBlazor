@@ -1,10 +1,14 @@
 # Default-Weather-Forecast-BlazorWasm-WebApi-MudBlazor
 
-## Weather.Api
+- [WeatherApp.Api](#weatherapp.api)
+  - [Weather API response](#weather-api-response)
+- [WeatherApp.Web](#weatherapp.web)
+
+## WeatherApp.Api
 ```js
 GET {{host}}/WeatherForecast
 ```
-### Weather api response
+### Weather API response
 ```json
 [
   {
@@ -21,7 +25,7 @@ GET {{host}}/WeatherForecast
   }
  ]
 ```
-## Weather.Web
+## WeatherApp.Web
 
 Default fetch:
 
