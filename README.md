@@ -1,8 +1,8 @@
 # Default-Weather-Forecast-BlazorWasm-WebApi-MudBlazor
-
-- [WeatherApp.Api](#weatherapp.api)
-  - [Weather API response](#weather-api-response)
-- [WeatherApp.Web](#WeatherApp.Web)
+- [Defaut Weather Forecast API consumed by Blazor Web Assembly](#Default-Weather-Forecast-BlazorWasm-WebApi-MudBlazor)
+  - [WeatherApp.Api](#weatherapp.api)
+    - [Weather API response](#weather-api-response)
+  - [WeatherApp.Web](#WeatherApp.Web)
 
 ## WeatherApp.Api
 ```js
