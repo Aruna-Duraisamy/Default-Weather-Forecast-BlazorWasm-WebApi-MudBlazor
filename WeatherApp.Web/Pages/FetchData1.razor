@@ -1,6 +1,8 @@
 @page "/fetchdata1"
 @using Dtos
 
+<MudText Typo="Typo.caption">This data is pulled from default RESTful
+    Weather API.</MudText>
 <MudTable Items="@WeatherForecasts"
     Filter="new Func<WeatherForecast,bool>(FilterFunc1)"
     @bind-SelectedItem="selectedItem1">
